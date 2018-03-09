@@ -54,7 +54,43 @@ public class Queue<X> {
     return this.size;
   }
 
-  // public boolean equals(Object obj) {}
+  public boolean equals(Object obj) {
+
+    // point to the same memory address
+    if (this == obj)
+      return true;
+
+    // one object is null
+    if (obj == null)
+      return false;
+
+    if (this.getClass() != obj.getClass())
+      return false;
+
+    
+    Queue q = (Queue<X>)obj;
+
+    if (this.size != q.size)
+      return false;
+
+    int positionThis = this.begin;
+    int positionQ    = q.begin;
+    int quantity     = this.size;
+
+    while (quantity > 0) {
+      if (!this.queue[positionThis].equals(q.queue[positionQ]))
+        return false;
+
+      // next element;
+      positionThis = (positionThis + 1) % this.maxLength;
+      positionQ = (positionQ + 1) % q.maxLength;
+      
+      quantity--;
+    }
+
+    return true;
+
+  }
 
   public String toString() {
     String str = "";

@@ -8,6 +8,7 @@ public class Program {
     try {
       int n = 5;
       Queue queue = new Queue(n);
+      Queue queue2 = new Queue(n);
       Stack stack = new Stack(n);
 
       // Queue
@@ -21,13 +22,18 @@ public class Program {
       System.out.println("Filling the queue...");
       for (int i = 0; i < n; i++) {
         queue.addItem("Test" + i);
+        queue2.addItem("Test" + i);
       }
+
+      System.out.println("Is the queue and queue2 equals? " + queue.equals(queue2));
 
       System.out.println("The queue is full? " + queue.isFull());
       System.out.println("Elements: " + queue.toString());
 
       System.out.println("Execute the first element: " + queue.getItem());
       queue.removeItem();
+
+      System.out.println("Is the queue and queue2 equals? " + queue.equals(queue2));
 
       System.out.println("The queue is full? " + queue.isFull());
       System.out.println("Elements: " + queue.toString());
