@@ -10,6 +10,7 @@ public class Program {
       Queue queue = new Queue(n);
       Queue queue2 = new Queue(n);
       Stack stack = new Stack(n);
+      Stack stack2 = new Stack(n);
 
       // Queue
       System.out.println("************************************************");
@@ -55,17 +56,19 @@ public class Program {
       System.out.println("Filling the stack...");
       for (int i = 0; i < n; i++) {
         stack.addItem("testStack" + i);
-        System.out.println(i + " " + stack.getItem());
+        stack2.addItem("testStack" + i);
       }
 
       System.out.println("The stack is full? " + stack.isFull());
       System.out.println("The stack is empty? " + stack.isEmpty());
+      System.out.println("Is the stack and stack2 equals? " + stack.equals(stack2));
       System.out.println("Elements: " + stack.toString());
 
       System.out.println("Execute the first element: " + stack.getItem());
       stack.removeItem();
 
       System.out.println("The stack is full? " + stack.isFull());
+      System.out.println("Is the stack and stack2 equals? " + stack.equals(stack2));
       System.out.println("Elements: " + stack.toString());
 
 

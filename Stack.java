@@ -54,7 +54,35 @@ public class Stack<X> {
     return this.size;
   }
 
-  // public boolean equals(Object obj) {}
+  public boolean equals(Object obj) {
+    if (this == obj)
+      return true;
+
+    if (obj == null)
+      return false;
+  
+    if (this.getClass() != obj.getClass())
+      return false;
+    
+    
+    Stack s = (Stack<X>)obj;
+
+    if (this.size != s.size)
+      return false;
+
+    int position = this.end;
+    int quantity = this.size;
+
+    while (quantity > 0) {
+      if (!this.stack[position].equals(s.stack[position]))
+        return false;
+      
+      position--;
+      quantity--;
+    }
+
+    return true;
+  }
 
   public String toString() {
     String str = "";
