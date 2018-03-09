@@ -14,7 +14,7 @@ public class Stack<X> {
     
   }
 
-  public void addElement(X item) throws Exception {
+  public void addItem(X item) throws Exception {
     if (item == null)
       throw new Exception("Item cannot be null");
 
@@ -26,11 +26,44 @@ public class Stack<X> {
     this.stack[end] = item;
   }
 
-  public X getElement() throws Exception {
+  public X getItem() throws Exception {
     if (this.size == 0)
-      throw new Exception("Stack empty");
+      throw new Exception("Stack is empty");
     
-    return this.stack[this.end];
+    return (X)this.stack[this.end];
+  }
+
+  public void removeItem() throws Exception {
+    if (this.size == 0)
+      throw new Exception("Stack is empty. Cannot remove any element.");
+
+    this.stack[this.end] = null;
+    this.end--;
+    this.size--;
+  }
+
+  public boolean isFull() {
+    return this.size == this.maxHeight;
+  }
+
+  public boolean isEmpty() {
+    return this.size == 0;
+  }
+
+  public int getLength() {
+    return this.size;
+  }
+
+  // public boolean equals(Object obj) {}
+
+  public String toString() {
+    String str = "";
+
+    for (int i = 0; i < this.size; i++) {
+      str += this.stack[i] + " ";
+    }
+
+    return str;
   }
 
 }
