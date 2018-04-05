@@ -1,10 +1,12 @@
+import java.lang.reflect.Method;
 
-public class Stack<X> {
+public class Stack<X> implements Cloneable {
   private Object[] stack;
   private int size, maxHeight, end;
 
   // constructor
-  public Stack(int maxHeight) throws Exception {
+  public Stack(int maxHeight) throws Exception 
+  {
     if (maxHeight <= 0)
       throw new Exception("Size must be positive");
     
@@ -31,21 +33,44 @@ public class Stack<X> {
 
   }
 
-  
-
-  public void addItem(X item) throws Exception {
+ /**
+  * Add an item to the stack
+  * <p>
+  * If there is space in the stack, this method
+  * add an object to the stack. 
+  * 
+  * @param  item  an object to be added to the stack
+  */
+  public void addItem(X item) throws Exception 
+  {
     if (item == null)
       throw new Exception("Item cannot be null");
 
     if (this.size == this.maxHeight)
       throw new Exception("Stack Overflow!");
+    
+    this.end++;
+    if(item instanceof Cloneable)
+    {
+      this.stack[end] = myClone(item);
+    }
+    else
+    {
+      this.stack[end] = item;
+    }
 
     this.size++;
-    this.end++;
-    this.stack[end] = item;
   }
 
-  public X getItem() throws Exception {
+ /**
+  * Retrieves the first item (on top) from a stack.
+  * <p>
+  * If the stack is not empty,  
+  * 
+  * @param  item  an object to be added to the stack
+  */
+  public X getItem() throws Exception 
+  {
     if (this.size == 0)
       throw new Exception("Stack is empty");
     
@@ -122,6 +147,62 @@ public class Stack<X> {
     }
 
     return str;
+  }
+
+  public int hashCode()
+  {
+    int ret = 494;
+
+    // for each attribute (size, maxHeight, end)
+    ret =  ret * 31 + new Integer(this.size     ).hashCode();
+    ret =  ret * 31 + new Integer(this.maxHeight).hashCode();
+    ret =  ret * 31 + new Integer(this.end      ).hashCode();
+
+    // loop over all elements in the stack
+    for (int i = 0; i < this.end; i++)
+      ret = ret * 31 + this.stack[i].hashCode();
+    
+    return ret;
+  }
+
+  public Object clone()
+  {
+    Stack<X> ret = null;
+
+    try
+    {
+      ret = new Stack(this);
+    }
+    catch (Exception error)
+    {}
+
+    return ret;
+  }
+
+  
+ /**
+  * Helper method to clone an object of a generic class X
+  * <p>
+  * 
+  * @param  model   is an object of a generic class X
+  * @return         an object identical to the one given as parameter
+  */
+  private X myClone(X model)
+  {
+    X ret = null;
+    try
+    {
+      Class<?> xClass = model.getClass();
+      Class<?>[] formalParameterType = null;
+      Method method = xClass.getMethod("clone", formalParameterType);
+      Object[] realParameter = null;
+
+      ret = (X) method.invoke(model, realParameter);      
+    }
+    catch(Exception error)
+    {}
+
+    return ret;
   }
 
 }

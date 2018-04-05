@@ -64,12 +64,16 @@ public class Program {
       System.out.println("Is the stack and stack2 equals? " + stack.equals(stack2));
       System.out.println("Elements: " + stack.toString());
 
+      System.out.println("HashCode: " + stack.hashCode());
+
       System.out.println("Execute the first element: " + stack.getItem());
       stack.removeItem();
 
       System.out.println("The stack is full? " + stack.isFull());
       System.out.println("Is the stack and stack2 equals? " + stack.equals(stack2));
       System.out.println("Elements: " + stack.toString());
+
+      System.out.println("HashCode: " + stack.hashCode());
 
 
 
