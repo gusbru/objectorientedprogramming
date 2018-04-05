@@ -74,7 +74,11 @@ public class Stack<X> implements Cloneable {
     if (this.size == 0)
       throw new Exception("Stack is empty");
     
-    return (X)this.stack[this.end];
+    if (this.stack[this.end] instanceof Cloneable)
+      return myClone((X)this.stack[this.end]);
+    else
+      return (X)this.stack[this.end];
+
   }
 
   public X getItem(int index) throws Exception 
@@ -85,7 +89,10 @@ public class Stack<X> implements Cloneable {
     if (index < 0 || index > this.size)
       throw new Exception("Index outside range");
 
-    return (X)this.stack[index];
+    if (this.stack[index] instanceof Cloneable)
+      return myClone((X)this.stack[index]);
+    else
+      return (X)this.stack[index];
   }
 
   public void removeItem() throws Exception {
@@ -108,6 +115,8 @@ public class Stack<X> implements Cloneable {
   public int getLength() {
     return this.size;
   }
+
+
 
   public boolean equals(Object obj) {
     if (this == obj)
@@ -193,11 +202,11 @@ public class Stack<X> implements Cloneable {
     try
     {
       Class<?> xClass = model.getClass();
-      Class<?>[] formalParameterType = null;
-      Method method = xClass.getMethod("clone", formalParameterType);
+      Class<?>[] parameterTypes = null;
+      Method method = xClass.getMethod("clone", parameterTypes);
       Object[] realParameter = null;
 
-      ret = (X) method.invoke(model, realParameter);      
+      ret = (X)method.invoke(model, realParameter);      
     }
     catch(Exception error)
     {}
