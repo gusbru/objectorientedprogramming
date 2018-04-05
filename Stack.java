@@ -1,8 +1,9 @@
 
 public class Stack<X> {
-  Object[] stack;
-  int size, maxHeight, end;
+  private Object[] stack;
+  private int size, maxHeight, end;
 
+  // constructor
   public Stack(int maxHeight) throws Exception {
     if (maxHeight <= 0)
       throw new Exception("Size must be positive");
@@ -13,6 +14,24 @@ public class Stack<X> {
     this.size      = 0;
     
   }
+
+  // copy constructor
+  public Stack(Stack<X> model) throws Exception 
+  {
+    if (model == null) 
+      throw new Exception("null object");
+
+    this.maxHeight = model.maxHeight;
+    this.end       = model.end;
+    this.size      = model.size;
+    this.stack     = new Object[maxHeight];
+
+    for (int i = 0; i < model.getLength(); i++)
+      this.stack[i] = model.getItem(i);
+
+  }
+
+  
 
   public void addItem(X item) throws Exception {
     if (item == null)
@@ -31,6 +50,17 @@ public class Stack<X> {
       throw new Exception("Stack is empty");
     
     return (X)this.stack[this.end];
+  }
+
+  public X getItem(int index) throws Exception 
+  {
+    if (this.size == 0)
+      throw new Exception("Stack is empty");
+    
+    if (index < 0 || index > this.size)
+      throw new Exception("Index outside range");
+
+    return (X)this.stack[index];
   }
 
   public void removeItem() throws Exception {
