@@ -23,6 +23,7 @@ public class Stack<X> implements Cloneable {
     if (model == null) 
       throw new Exception("null object");
 
+    // not possible.... trying to access a private attribute
     this.maxHeight = model.maxHeight;
     this.end       = model.end;
     this.size      = model.size;
@@ -104,17 +105,32 @@ public class Stack<X> implements Cloneable {
     this.size--;
   }
 
-  public boolean isFull() {
+  public int getMaxHight()
+  {
+    return this.maxHeight;
+  }
+
+  public int getSize()
+  {
+    return this.size;
+  }
+
+  public int getEnd()
+  {
+    return this.end;
+  }
+
+  public boolean isFull()
+  {
     return this.size == this.maxHeight;
   }
 
-  public boolean isEmpty() {
+  public boolean isEmpty()
+  {
     return this.size == 0;
   }
 
-  public int getLength() {
-    return this.size;
-  }
+  
 
 
 

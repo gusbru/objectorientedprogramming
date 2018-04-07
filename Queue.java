@@ -1,9 +1,12 @@
 
-public class Queue<X> {
+public class Queue<X> implements Cloneable 
+{
   private Object[] queue;
   private int size, maxLength, begin, end;
 
-  public Queue(int maxLength) throws Exception {
+  // constructor
+  public Queue(int maxLength) throws Exception 
+  {
     if (maxLength <= 0)
       throw new Exception("Invalid queue size");
     
@@ -12,6 +15,21 @@ public class Queue<X> {
     this.begin     =  0;
     this.end       = -1;
     this.queue     = new Object[maxLength];
+  }
+
+  // copy-constructor
+  public Queue(Queue<X> model) throws Exception 
+  {
+	  if (model == null)
+		  throw new Exception("null object");
+
+	  this.maxLength = model.getMaxLength();
+	  this.size      = model.getSize();
+	  this.begin     = model.getBegin();
+	  this.end       = model.getEnd();
+	  
+    
+		  
   }
 
   public void addItem(X item) throws Exception {
@@ -50,8 +68,23 @@ public class Queue<X> {
     return this.size == 0;
   }
 
-  public int getLength() {
+  public int getSize() {
     return this.size;
+  }
+
+  public int getBegin()
+  {
+    return this.begin;
+  }
+
+  public int getEnd()
+  {
+    return this.end;
+  }
+
+  public int getMaxLength()
+  {
+    return this.maxLength;
   }
 
   public boolean equals(Object obj) {
